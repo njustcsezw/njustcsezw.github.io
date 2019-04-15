@@ -7,14 +7,19 @@
   
   <title>Java 内部类详解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="Java内部类Java在JDK1.1开始引入内部类，主要分为非静态内部类和静态内部类，由关键字static区分  内部类提供了更好的封装， 可以使用private不让包中其它类访问 内部类可以访问外部类的私有成员（private为类访问权限） 匿名内部类适合用于创建仅需要一次使用的类 内部类比外部类多了三个修饰符：private， protected， static 非静态类中不能有静态成员">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Java 内部类详解">
 <meta property="og:url" content="http://yoursite.com/2019/04/15/Java-内部类详解/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java内部类Java在JDK1.1开始引入内部类，主要分为非静态内部类和静态内部类，由关键字static区分  内部类提供了更好的封装， 可以使用private不让包中其它类访问 内部类可以访问外部类的私有成员（private为类访问权限） 匿名内部类适合用于创建仅需要一次使用的类 内部类比外部类多了三个修饰符：private， protected， static 非静态类中不能有静态成员">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-15T07:42:13.028Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6860761-fd2f51090a890873.jpg?imageMogr2/auto-orient/">
+<meta property="og:updated_time" content="2019-04-15T09:33:04.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 内部类详解">
+<meta name="twitter:description" content="Java内部类Java在JDK1.1开始引入内部类，主要分为非静态内部类和静态内部类，由关键字static区分  内部类提供了更好的封装， 可以使用private不让包中其它类访问 内部类可以访问外部类的私有成员（private为类访问权限） 匿名内部类适合用于创建仅需要一次使用的类 内部类比外部类多了三个修饰符：private， protected， static 非静态类中不能有静态成员">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6860761-fd2f51090a890873.jpg?imageMogr2/auto-orient/">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -83,11 +88,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <hr>
+<h3 id="Java内部类"><a href="#Java内部类" class="headerlink" title="Java内部类"></a>Java内部类</h3><p>Java在JDK1.1开始引入内部类，主要分为<strong>非静态内部类</strong>和<strong>静态内部类</strong>，由关键字<strong>static</strong>区分</p>
+<ul>
+<li>内部类提供了更好的封装， 可以使用private不让包中其它类访问</li>
+<li>内部类可以访问外部类的私有成员（private为类访问权限）</li>
+<li>匿名内部类适合用于创建仅需要一次使用的类</li>
+<li>内部类比外部类多了三个修饰符：private， protected， static</li>
+<li>非静态类中不能有静态成员</li>
+</ul>
+<p>成员内部类（除去局部内部类和匿名内部类）是一种与成员变量，方法，构造器和初始化块相似的<strong>类成员</strong>，故多了三种修饰符。</p>
+<hr>
+<h4 id="非静态内部类"><a href="#非静态内部类" class="headerlink" title="非静态内部类"></a>非静态内部类</h4><p>可定义于类中的任何位置（若定义于方法中则成为局部内部类），参照代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cow</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">double</span> weight;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 外部类的两个重载的构造器</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Cow</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Cow</span><span class="params">(<span class="keyword">double</span> weight)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.weight = weight;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 定义一个非静态内部类</span></span><br><span class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">CowLeg</span></span></span><br><span class="line"><span class="class">	</span>&#123;</span><br><span class="line">		<span class="comment">// 非静态内部类的两个实例变量</span></span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">double</span> length;</span><br><span class="line">		<span class="keyword">private</span> String color;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 非静态内部类的两个重载的构造器</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">CowLeg</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">CowLeg</span><span class="params">(<span class="keyword">double</span> length , String color)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.length = length;</span><br><span class="line">			<span class="keyword">this</span>.color = color;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 省去length、color的setter和getter方法</span></span><br><span class="line">		<span class="comment">// 非静态内部类的实例方法</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"当前牛腿颜色是："</span></span><br><span class="line">				+ color + <span class="string">", 高："</span> + length);</span><br><span class="line">			<span class="comment">// 直接访问外部类的private修饰的成员变量</span></span><br><span class="line">			System.out.println(<span class="string">"本牛腿所在牛重："</span> + weight);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		CowLeg cl = <span class="keyword">new</span> CowLeg(<span class="number">1.12</span> , <span class="string">"黑白相间"</span>);</span><br><span class="line">		cl.info();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		Cow cow = <span class="keyword">new</span> Cow(<span class="number">378.9</span>);</span><br><span class="line">		cow.test();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不难发现在外部类中使用非静态类时，与使用平时使用普通类没有太大的区别；<br>在非静态内部类的方法中<strong>访问某个变量</strong>时，<strong>优先级</strong>如下：<br>该方法内 &gt; 该内部类 &gt; 外部类<br>可以通过OutterClass.this.propName访问外部类的实例变量（非静态变量），通过this.propName访问非静态类的实例变量；<br>非静态类可以访问外部类的private成员，反之不行，若外部类要访问内部类的成员（变量和方法），必须显式创建内部类对象来访问，参照代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> outProp = <span class="number">9</span>;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> inProp = <span class="number">5</span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">acessOuterProp</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">// 非静态内部类可以直接访问外部类的private成员变量</span></span><br><span class="line">            System.out.println(<span class="string">"外部类的outProp值:"</span></span><br><span class="line">                    + outProp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accessInnerProp</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 外部类不能直接访问非静态内部类的实例变量,</span></span><br><span class="line">        <span class="comment">// 下面代码出现编译错误</span></span><br><span class="line">        <span class="comment">// System.out.println("内部类的inProp值:" + inProp);</span></span><br><span class="line">        <span class="comment">// 如需访问内部类的实例变量，必须显式创建内部类对象</span></span><br><span class="line">        System.out.println(<span class="string">"内部类的inProp值:"</span></span><br><span class="line">                + <span class="keyword">new</span> Inner().inProp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accessInnerProp1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 如需访问内部类的实例变量，必须显式创建内部类对象</span></span><br><span class="line">        <span class="keyword">new</span> Inner().acessOuterProp();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 执行下面代码，只创建了外部类对象，还未创建内部类对象</span></span><br><span class="line">        Outer out = <span class="keyword">new</span> Outer();</span><br><span class="line">        out.accessInnerProp(); <span class="comment">//内部类的inProp值:5</span></span><br><span class="line">        out.accessInnerProp1(); <span class="comment">//外部类的outProp值:9</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还要注意一点的是，非静态类里不能有静态成员（静态变量，静态方法，静态初始化块）</p>
+<hr>
+<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4><hr>
+<p>markdown</p>
+<p>（ <em> </em> ）  <em>这是倾斜的文字</em><br>（ <strong>    </strong> ）  <strong>这是加粗的文字</strong><br>（<strong><em>    </em></strong>  ）   <strong><em>这是斜体加粗的文字</em></strong><br>（~~ <del>） ~~这是加删除线的文字</del> </p>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>表头</th>
+<th style="text-align:center">表头</th>
+<th style="text-align:right">表头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内容</td>
+<td style="text-align:center">内容</td>
+<td style="text-align:right">内容</td>
+</tr>
+<tr>
+<td>内容</td>
+<td style="text-align:center">内容</td>
+<td style="text-align:right">内容</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://upload-images.jianshu.io/upload_images/6860761-fd2f51090a890873.jpg?imageMogr2/auto-orient/" alt="block_chain"></p>
+<p><a href="http://baidu.com" target="_blank" rel="noopener">百度</a></p>
+<h6 id="title6"><a href="#title6" class="headerlink" title="title6"></a>title6</h6><h5 id="title5"><a href="#title5" class="headerlink" title="title5"></a>title5</h5><h4 id="title4"><a href="#title4" class="headerlink" title="title4"></a>title4</h4><h3 id="title3"><a href="#title3" class="headerlink" title="title3"></a>title3</h3><h2 id="title2"><a href="#title2" class="headerlink" title="title2"></a>title2</h2><hr>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/15/Java-内部类详解/" data-id="cjui1wgz00000tgqudk7qtnbl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/15/Java-内部类详解/" data-id="cjui5vb0d0001hcquik9eyk89" class="article-share-link">Share</a>
       
       
     </footer>
