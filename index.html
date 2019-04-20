@@ -101,43 +101,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> outProp = <span class="number">9</span>;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> inProp = <span class="number">5</span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">acessOuterProp</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">// 非静态内部类可以直接访问外部类的private成员变量</span></span><br><span class="line">            System.out.println(<span class="string">"外部类的outProp值:"</span></span><br><span class="line">                    + outProp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accessInnerProp</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 外部类不能直接访问非静态内部类的实例变量,</span></span><br><span class="line">        <span class="comment">// 下面代码出现编译错误</span></span><br><span class="line">        <span class="comment">// System.out.println("内部类的inProp值:" + inProp);</span></span><br><span class="line">        <span class="comment">// 如需访问内部类的实例变量，必须显式创建内部类对象</span></span><br><span class="line">        System.out.println(<span class="string">"内部类的inProp值:"</span></span><br><span class="line">                + <span class="keyword">new</span> Inner().inProp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accessInnerProp1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 如需访问内部类的实例变量，必须显式创建内部类对象</span></span><br><span class="line">        <span class="keyword">new</span> Inner().acessOuterProp();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 执行下面代码，只创建了外部类对象，还未创建内部类对象</span></span><br><span class="line">        Outer out = <span class="keyword">new</span> Outer();</span><br><span class="line">        out.accessInnerProp(); <span class="comment">//内部类的inProp值:5</span></span><br><span class="line">        out.accessInnerProp1(); <span class="comment">//外部类的outProp值:9</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>还要注意一点的是，非静态类里不能有静态成员（静态变量，静态方法，静态初始化块）</p>
 <hr>
-<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4><hr>
-<p>markdown</p>
-<p>（ <em> </em> ）  <em>这是倾斜的文字</em><br>（ <strong>    </strong> ）  <strong>这是加粗的文字</strong><br>（<strong><em>    </em></strong>  ）   <strong><em>这是斜体加粗的文字</em></strong><br>（~~ <del>） ~~这是加删除线的文字</del> </p>
-<ul>
-<li>列表内容</li>
-</ul>
-<ul>
-<li>列表内容</li>
-</ul>
-<ul>
-<li>列表内容</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>表头</th>
-<th style="text-align:center">表头</th>
-<th style="text-align:right">表头</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>内容</td>
-<td style="text-align:center">内容</td>
-<td style="text-align:right">内容</td>
-</tr>
-<tr>
-<td>内容</td>
-<td style="text-align:center">内容</td>
-<td style="text-align:right">内容</td>
-</tr>
-</tbody>
-</table>
-<p><img src="https://upload-images.jianshu.io/upload_images/6860761-fd2f51090a890873.jpg?imageMogr2/auto-orient/" alt="block_chain"></p>
-<p><a href="http://baidu.com" target="_blank" rel="noopener">百度</a></p>
-<h6 id="title6"><a href="#title6" class="headerlink" title="title6"></a>title6</h6><h5 id="title5"><a href="#title5" class="headerlink" title="title5"></a>title5</h5><h4 id="title4"><a href="#title4" class="headerlink" title="title4"></a>title4</h4><h3 id="title3"><a href="#title3" class="headerlink" title="title3"></a>title3</h3><h2 id="title2"><a href="#title2" class="headerlink" title="title2"></a>title2</h2><hr>
-
+<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4>
       
     </div>
     <footer class="article-footer">
@@ -174,6 +138,42 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>just for testing~</p>
+<hr>
+<p>markdown</p>
+<p>（ <em> </em> ）  <em>这是倾斜的文字</em><br>（ <strong>    </strong> ）  <strong>这是加粗的文字</strong><br>（<strong><em>    </em></strong>  ）   <strong><em>这是斜体加粗的文字</em></strong><br>（~~ <del>） ~~这是加删除线的文字</del> </p>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>表头</th>
+<th style="text-align:center">表头</th>
+<th style="text-align:right">表头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内容</td>
+<td style="text-align:center">内容</td>
+<td style="text-align:right">内容</td>
+</tr>
+<tr>
+<td>内容</td>
+<td style="text-align:center">内容</td>
+<td style="text-align:right">内容</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://upload-images.jianshu.io/upload_images/6860761-fd2f51090a890873.jpg?imageMogr2/auto-orient/" alt="block_chain"></p>
+<p><a href="http://baidu.com" target="_blank" rel="noopener">百度</a></p>
+<h6 id="title6"><a href="#title6" class="headerlink" title="title6"></a>title6</h6><h5 id="title5"><a href="#title5" class="headerlink" title="title5"></a>title5</h5><h4 id="title4"><a href="#title4" class="headerlink" title="title4"></a>title4</h4><h3 id="title3"><a href="#title3" class="headerlink" title="title3"></a>title3</h3><h2 id="title2"><a href="#title2" class="headerlink" title="title2"></a>title2</h2><hr>
 
       
     </div>
